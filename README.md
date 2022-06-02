@@ -6,4 +6,4 @@ Title: Color-Saliency-Aware Correlation Filters with Approximate Affine Transfor
 > At present, only the core code has been uploaded, and the complete code will be uploaded after finishing.
 Thanks!
 >
-![Fig1](https://github.com/lv346308962/CSACF/blob/a1ff8735a1cb621d1f5d76f1d2bc3be77c086c26/imgs/Fig1.pdf)
+![Fig1](https://github.com/lv346308962/CSACF/blob/03a8452c99fdb6c984b4790e37b87b3f74a3d9ee/imgs/frame.png)
