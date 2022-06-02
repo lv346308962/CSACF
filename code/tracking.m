@@ -144,39 +144,32 @@ function [ pos, tmp_sc, tmp_rot, cscore,sscore] = tracking(  im,pos, p, polish ,
     tmp_sc0=tmp_sc;
 %     tmp_rot0=tmp_rot;
 
-    if p.dc == 1
-        %% length
+    if p.dc == 1 % decouple the scale
+        patchL_dc = get_affine_subwindow(im, pos, 1,p.rot+tmp_rot,floor(p.sc.*p.scale_sz));
+        patchL_dc = mresize(patchL_dc, p.scale_sz_window);
+
+        % convert into logpolar
+        patchLp_dc = mpolar(double(patchL_dc),p.mag);    
+
+        % get feature of scale and rotation
+        patchLp_dc= get_features_L(patchLp_dc, p.features_scale, p.cell_size, []);
+
+        %% horizontal(length) direction
         threshold=4;
         lengthL1=1:threshold;
         lengthL2=16-threshold:16+threshold;
         lengthL3=33-threshold:32;
-        patchL_length = get_affine_subwindow(im, pos, 1,p.rot+tmp_rot,floor(p.sc.*p.scale_sz*1));
-        patchL_length = mresize(patchL_length, p.scale_sz_window);
-
-        % convert into logpolar
-        patchLp_length = mpolar(double(patchL_length),p.mag);    
-
-        % get feature of scale and rotation
-        patchLp_length= get_features_L(patchLp_length, p.features_scale, p.cell_size, []);
 
         %segement mpolar pathch
-        patchLp_length=patchLp_length([lengthL1 lengthL2 lengthL3],:,:);
+        patchLp_length=patchLp_dc([lengthL1 lengthL2 lengthL3],:,:);
         modelPatch=p.modelPatch([lengthL1 lengthL2 lengthL3],:,:);
         [tmp_sc_length,~,sscore_length] = estimateScale(modelPatch, patchLp_length ,p.mag);
-        %% width
+        %% vertical(width) direction 
         widthL1=8-threshold:8+threshold;
         widthL2=24-threshold:24+threshold;
-        patchL_width = get_affine_subwindow(im, pos, 1,p.rot+tmp_rot,floor(p.sc.*p.scale_sz*1));
-        patchL_width = mresize(patchL_width, p.scale_sz_window);
-
-        % convert into logpolar
-        patchLp_width = mpolar(double(patchL_width),p.mag);    
-
-        % get feature of scale and rotation
-        patchLp_width= get_features_L(patchLp_width, p.features_scale, p.cell_size, []);
-
-        %segement mpolar pathch
-        patchLp_width=patchLp_width([widthL1 widthL2],:,:);
+        
+        % segement mpolar pathch
+        patchLp_width=patchLp_dc([widthL1 widthL2],:,:);
         modelPatch=p.modelPatch([widthL1 widthL2],:,:);
         [tmp_sc_width,~,sscore_width] = estimateScale(modelPatch, patchLp_width ,p.mag);
         if p.limit == 1
@@ -188,7 +181,7 @@ function [ pos, tmp_sc, tmp_rot, cscore,sscore] = tracking(  im,pos, p, polish ,
         else
             tmp_sc = [tmp_sc_width 0;0 tmp_sc_length];     
         end
-                % filter bad results
+        % filter bad results
         if tmp_sc(1) > 1.4, tmp_sc(1) =1.4;end;
         if tmp_sc(4) > 1.4, tmp_sc(4) =1.4;end;
         if tmp_sc(1) < 0.6, tmp_sc(1) =0.6;end;   
@@ -197,12 +190,10 @@ function [ pos, tmp_sc, tmp_rot, cscore,sscore] = tracking(  im,pos, p, polish ,
         if tmp_rot < -1, tmp_rot =0;end;
     
     else
-            % filter bad results
+        % filter bad results
         if tmp_sc > 1.4, tmp_sc =1.4;end;
         if tmp_sc < 0.6, tmp_sc =0.6;end;   
         if tmp_rot > 1, tmp_rot =0;end;
         if tmp_rot < -1, tmp_rot =0;end;    
     end
-
 end
-
