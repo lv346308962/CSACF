@@ -4,6 +4,8 @@ Title: Color-Saliency-Aware Correlation Filters with Approximate Affine Transfor
 >
 The paper has been accepted for publication in The Visual Computer.
 >
+Our tracker is implemented based on the MATLAB platform (used C++ files are compiled with Visual Studio), and runs on a PC machine with an Intel(R) Core (TM) i5-6500CPU, 3.2GHz, 8GB RAM.
+>
 ![Fig1](https://github.com/lv346308962/CSACF/blob/03a8452c99fdb6c984b4790e37b87b3f74a3d9ee/imgs/frame.png)
 ## Updates
 > The results of the experiment have been uploaded.
