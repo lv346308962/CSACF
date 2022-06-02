@@ -7,7 +7,7 @@ The paper has been accepted for publication in The Visual Computer.
 ## Updates
 > The results of the experiment have been uploaded.
 > 
-> At present, only the core code has been uploaded, fast implementation of approximate affine transform can replace tracking.M of LDES tracker (https://github.com/ihpdep/LDES) and set p.dc = 1, and the complete code will be uploaded after finishing. 
+> At present, only the core code has been uploaded, fast implementation of approximate affine transform can replace tracking.m of LDES tracker (https://github.com/ihpdep/LDES) and set p.dc = 1, and the complete code will be uploaded after finishing. 
 Thanks!
 >
 ## Acknowledgements
