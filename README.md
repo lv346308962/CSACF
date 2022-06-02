@@ -13,6 +13,6 @@ The paper has been accepted for publication in The Visual Computer.
 ## Acknowledgements
 We thank for Dr. Yang Li and Dr. Jianming Zhang for their basic work before. In this work, we have borrowed the similarity scale estimation modules from the LDES tracker and the saliency detection modules from MB+ mthod (https://github.com/jimmie33/MBS).
 ## Example
-### Red: CSACF ------------ Green: LDES ------------ Blue: ECO-HC ------------ Black BACF ------------ Pink: Staple
+### [Red: CSACF] ---- [Green: LDES] ---- [Blue: ECO-HC] ---- [Black: BACF] ---- [Pink: Staple]
 <img src="https://github.com/lv346308962/CSACF/blob/a8205a3d22d421202daadd9824a4196d6211dbad/imgs/test1.gif" width="200px"/>
 
